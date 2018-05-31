@@ -13,6 +13,12 @@ func main() {
 	}
 	sourcepath := os.Args[1]
 	destinationpath := os.Args[2]
+	if _, err := os.Stat(sourcepath); err != nil {
+		log.Fatal("Source file do not exist")
+	}
+	if _, err := os.Stat(destinationpath); err == nil {
+		log.Fatal("Destination file exist")
+	}
 	source, err := os.Open(sourcepath)
 	if err != nil {
 		log.Fatal(err)
